@@ -6,9 +6,14 @@
 
 ## How To use
 > **Requires [PHP 7.3+ | PHP 8](https://php.net/releases/)**
->
-- Clone this repository to a location where it can access a Magento 2 installation
-- This app will run PHP_CodeSniffer with phpcompatibility/php-compatibility on the M2 doc root
+> 
+>This app will run PHP_CodeSniffer with phpcompatibility/php-compatibility on the M2 doc root
+
+- Clone this repository OR download the compiled audit file to a location where it can access a Magento 2 installation OR
+- `wget https://github.com/willtran/magento2-php-8-compatibility-check/raw/main/audit` and `chmod u+x audit`
+
+
+
 ```
 Description:
   Check all module in an m2 application for PHP8 compatibility
