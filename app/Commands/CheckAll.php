@@ -89,7 +89,6 @@ class CheckAll extends Command
     private function renderResult($result) {
         usort($result, function($a,$b) {
             if ($b['result'] !== 'OK' && $a['result'] == 'OK') return -1; else return 1;
-            return 0;
         });
         $tableDataHtml = '';
         foreach ($result as $module) {
@@ -111,6 +110,11 @@ class CheckAll extends Command
 
     }
 
+    /**
+     * @param $rootDir
+     * @param $module
+     * @return Process
+     */
     private function checkModuleForPHP8Compatibility($rootDir, $module) {
         $process = new Process(['vendor/bin/phpcs', '-p', $rootDir . DIRECTORY_SEPARATOR . $module['path'], '--standard=vendor/phpcompatibility/php-compatibility/PHPCompatibility', '--extensions=php,phtml', '--runtime-set', 'testVersion',  $this->input->getOption('php-version')]);
         $process->setTimeout(0);
@@ -132,7 +136,7 @@ class CheckAll extends Command
             'root'      => $rootDir
         ]);
         $modules = [];
-        $moduleLocations = ['app' . DIRECTORY_SEPARATOR . 'code'];
+        $moduleLocations = ['app' . DIRECTORY_SEPARATOR . 'code', 'vendor'];
         foreach ($moduleLocations as $location) {
             $packageDirs = $magentoRootDisk->directories($location);
             foreach ($packageDirs as $packageDir) {

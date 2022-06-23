@@ -1,36 +1,42 @@
-<p align="center">
-    <img title="Laravel Zero" height="100" src="https://raw.githubusercontent.com/laravel-zero/docs/master/images/logo/laravel-zero-readme.png" />
-</p>
+<h1 align="center" style="border:none !important">
+    <code>M2 PHP version compatibility check</code>
+    <br>
+    <br>
+</h1>
 
-<p align="center">
-  <a href="https://github.com/laravel-zero/framework/actions"><img src="https://img.shields.io/github/workflow/status/laravel-zero/framework/Tests.svg" alt="Build Status"></img></a>
-  <a href="https://packagist.org/packages/laravel-zero/framework"><img src="https://img.shields.io/packagist/dt/laravel-zero/framework.svg" alt="Total Downloads"></a>
-  <a href="https://packagist.org/packages/laravel-zero/framework"><img src="https://img.shields.io/packagist/v/laravel-zero/framework.svg?label=stable" alt="Latest Stable Version"></a>
-  <a href="https://packagist.org/packages/laravel-zero/framework"><img src="https://img.shields.io/packagist/l/laravel-zero/framework.svg" alt="License"></a>
-</p>
+## How To use
+> **Requires [PHP 8.0+](https://php.net/releases/)**
+> 
+- Clone this repository to a location where it can access a Magento 2 installation
+- Run composer install
+- This app will run PHP_CodeSniffer with phpcompatibility/php-compatibility on the M2 doc root
+```
+Description:
+  Check all module in an m2 application for PHP8 compatibility
 
-<h4> <center>This is a <bold>community project</bold> and not an official Laravel one </center></h4>
+Usage:
+  check:all [options] [--] <root-dir>
 
-Laravel Zero was created by, and is maintained by [Nuno Maduro](https://github.com/nunomaduro), and is a micro-framework that provides an elegant starting point for your console application. It is an **unofficial** and customized version of Laravel optimized for building command-line applications.
+Arguments:
+  root-dir
 
-- Built on top of the [Laravel](https://laravel.com) components.
-- Optional installation of Laravel [Eloquent](https://laravel-zero.com/docs/database/), Laravel [Logging](https://laravel-zero.com/docs/logging/) and many others.
-- Supports interactive [menus](https://laravel-zero.com/docs/build-interactive-menus/) and [desktop notifications](https://laravel-zero.com/docs/send-desktop-notifications/) on Linux, Windows & MacOS.
-- Ships with a [Scheduler](https://laravel-zero.com/docs/task-scheduling/) and  a [Standalone Compiler](https://laravel-zero.com/docs/build-a-standalone-application/).
-- Integration with [Collision](https://github.com/nunomaduro/collision) - Beautiful error reporting
+Options:
+      --php-version[=PHP-VERSION]   [default: "8.1"]
+      --threads[=THREADS]           [default: "4"]
+```
 
-------
+Sample: `php application check:all /var/projects/magento2 --threads=16`
 
-## Documentation
-
-For full documentation, visit [laravel-zero.com](https://laravel-zero.com/).
-
-## Support the development
-**Do you like this project? Support it by donating**
-
-- PayPal: [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=66BYDWAT92N6L)
-- Patreon: [Donate](https://www.patreon.com/nunomaduro)
-
-## License
-
-Laravel Zero is an open-source software licensed under the MIT license.
+```
++---------------------------------+----------------------------------------------------------+---------------+
+| Module Name                     | Module Dir                                               | Compatiblity  |
++---------------------------------+----------------------------------------------------------+---------------+
+| 'Justuno_Core'                  | vendor/justuno.com/core                                  | OK            |
+| 'MSP_TwoFactorAuth'             | vendor/msp/twofactorauth                                 | OK            |
+| 'MagePal_Reindex'               | vendor/magepal/magento2-reindex                          | OK            |
+| 'Vertex_AddressValidationApi'   | vendor/vertexinc/module-address-validation-api           | OK            |
+...
+| vendor/snowdog/theme-blank-sass | vendor/snowdog/theme-blank-sass                          | OK            |
+| 'Justuno_M2'                    | vendor/justuno.com/m2                                    | General error |
++---------------------------------+----------------------------------------------------------+---------------+
+```
