@@ -18,6 +18,7 @@
     "require": {
         "php": "^7.3|^8.0",
         "laravel-zero/framework": "^8.8",
+        "nunomaduro/termwind": "^1.11",
         "phpcompatibility/php-compatibility": "^9.3"
     },
     "require-dev": {
